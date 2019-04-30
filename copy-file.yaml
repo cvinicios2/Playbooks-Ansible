@@ -1,0 +1,23 @@
+- name: criando diretórios
+  hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - file:
+       path: "{{item}}"
+       state: directory
+      with_items:
+       - /home/devops/dir01
+       - /home/devops/dir02
+    - copy:
+       src: '/home/file-devops.txt'
+       dest: "{{item}}"
+       owner: root
+       group: root
+       mode: 0644
+      with_items:        
+       - /home/devops/dir01
+       - /home/devops/dir02
+ 

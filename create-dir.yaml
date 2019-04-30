@@ -1,0 +1,13 @@
+- name: criando diretórios
+  hosts: all
+  remote_user: root
+  become: yes
+  become_method: sudo
+  connection: ssh
+  tasks:
+    - file:
+       path: "{{item}}"
+       state: directory
+      with_items:
+       - /home/devops/dir01
+       - /home/devops/dir02
